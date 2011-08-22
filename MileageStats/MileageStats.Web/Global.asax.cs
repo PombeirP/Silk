@@ -24,7 +24,10 @@ using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using MileageStats.Web.Models;
 using MileageStats.Web.Authentication;
+using MileageStats.Web.UnityExtensions;
 using MileageStats.Data;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace MileageStats.Web
 {
@@ -33,6 +36,7 @@ namespace MileageStats.Web
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        private static IUnityContainer container;
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
@@ -109,6 +113,8 @@ namespace MileageStats.Web
         public override void Init()
         {
             this.PostAuthenticateRequest += this.PostAuthenticateRequestHandler;
+            this.EndRequest += this.EndRequestHandler;
+
             base.Init();
         }
 
@@ -121,6 +127,22 @@ namespace MileageStats.Web
 
             InitializeDependencyInjectionContainer();
             InitializeDatabase();
+        }
+
+        private void EndRequestHandler(object sender, EventArgs e)
+        {
+            // This is a workaround since subscribing to HttpContext.Current.ApplicationInstance.EndRequest 
+            // from HttpContext.Current.ApplicationInstance.BeginRequest does not work. 
+            IEnumerable<UnityHttpContextPerRequestLifetimeManager> perRequestManagers = 
+                container.Registrations
+                    .Select(r => r.LifetimeManager)
+                    .OfType<UnityHttpContextPerRequestLifetimeManager>()
+                    .ToArray();
+
+            foreach (var manager in perRequestManagers)
+            {
+                manager.Dispose();
+            }
         }
 
         private void PostAuthenticateRequestHandler(object sender, EventArgs e)
@@ -149,7 +171,7 @@ namespace MileageStats.Web
             Justification = "This should survive the lifetime of the application.")]
         private static void InitializeDependencyInjectionContainer()
         {
-            IUnityContainer container = new UnityContainerFactory().CreateConfiguredContainer();
+            container = new UnityContainerFactory().CreateConfiguredContainer();            
             var serviceLocator = new UnityServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => serviceLocator);
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
@@ -160,5 +182,7 @@ namespace MileageStats.Web
             var repositoryInitializer = ServiceLocator.Current.GetInstance<IRepositoryInitializer>();
             repositoryInitializer.Initialize();           
         }
+
+        
     }
 }

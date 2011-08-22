@@ -28,7 +28,6 @@
         var v = $('#vehicle-list-contents > div').tile();
         v.tile('moveTo', {
             position: { top: 50, left: 50 },
-            queueName: 'test queue',
             duration: 500
         }, function () {
             equal($('.wrapper').css('top'), '50px', 'top has been set');
@@ -43,11 +42,9 @@
         var v = $('#vehicle-list-contents > div').tile();
         v.tile('moveTo', [{
             position: { top: 50, left: 50 },
-            queueName: 'test queue',
             duration: 10
         }, {
             position: { top: 150, left: 150 },
-            queueName: 'test queue',
             duration: 10
         }], function () {
             equal($('.wrapper').css('top'), '150px', 'top has been set');
@@ -56,11 +53,5 @@
         });
         stop(2000);
     });
-
-    // unlock tiles before animating them
-    // respond to a move method (that accepts a side and a value)
-    // respond to a collapse method
-    // respond to an expand method
-    // lock tiles after animating them (callback on the step2 queue)
 
 }(jQuery));

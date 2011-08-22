@@ -310,7 +310,7 @@
     <value>Fuel Efficiency</value>
   </data>
   <data name="FillupEntryPricePerUnitLabelText" xml:space="preserve">
-    <value>Price Per Unit</value>
+    <value>Price Per Unit (ex. 3.75)</value>
   </data>
   <data name="FillupEntryTotalCostLabelText" xml:space="preserve">
     <value>Total Cost</value>
@@ -319,10 +319,10 @@
     <value>Total Fuel Cost</value>
   </data>
   <data name="FillupEntryTotalUnitsLabelText" xml:space="preserve">
-    <value>Total Units</value>
+    <value>Total Units (ex. 10.123)</value>
   </data>
   <data name="FillupEntryTransactionFeeLabelText" xml:space="preserve">
-    <value>Transaction Fee</value>
+    <value>Transaction Fee (ex. 0.45)</value>
   </data>
   <data name="FillupEntryUnitOfMeasureLabelText" xml:space="preserve">
     <value>Unit Of Measure</value>

@@ -203,6 +203,7 @@
     <Content Include="Content\title-hover.png" />
     <Content Include="Content\trans_pixel.gif" />
     <Content Include="Content\vehicle.png" />
+    <Content Include="Content\video-poster.png" />
     <Content Include="Content\yahoo.png" />
     <Content Include="favicon.ico" />
     <Content Include="GenericError.htm" />

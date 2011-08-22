@@ -238,7 +238,11 @@ body
 #content .info .left-video
 {
 	float: left;
-	width: 500px;
+}
+
+#content .info .left-video video, #content .info .left-video div
+{
+    width: 470px;
 	height: 264px;
 	margin: 12px;
 	padding: 22px;

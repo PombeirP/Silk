@@ -49,7 +49,7 @@
 
         document.documentMode = undefined;
 
-        mstats.pinnedSite.intializePinndedSiteImage();
+        mstats.pinnedSite.initializePinnedSiteImage();
 
         ok(true, 'pinnedSite.initialized failed silently');
     });
@@ -59,7 +59,7 @@
 
         mstats.pinnedSite.isPinned = function () { return false; };
 
-        mstats.pinnedSite.intializePinndedSiteImage();
+        mstats.pinnedSite.initializePinnedSiteImage();
 
         ok(true, 'pinnedSite.initialized failed silently');
     });
@@ -68,7 +68,7 @@
         expect(1);
 
         mstats.pinnedSite.isPinned = function () { return false; };
-        mstats.pinnedSite.intializePinndedSiteImage();
+        mstats.pinnedSite.initializePinnedSiteImage();
 
         $('#pinnedSiteImage').simulate('mouseover');
 
@@ -79,7 +79,7 @@
         expect(1);
 
         mstats.pinnedSite.isPinned = function () { return false; };
-        mstats.pinnedSite.intializePinndedSiteImage();
+        mstats.pinnedSite.initializePinnedSiteImage();
 
         $('#pinnedSiteCallout').show();
 
@@ -92,7 +92,7 @@
         expect(1);
 
         mstats.pinnedSite.isPinned = function () { return false; };
-        mstats.pinnedSite.intializePinndedSiteImage();
+        mstats.pinnedSite.initializePinnedSiteImage();
 
         $('#pinnedSiteCallout').show();
 
